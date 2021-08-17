@@ -1,0 +1,94 @@
+  
+
+<?php $__env->startSection('title_web'); ?>
+    Edit RPP
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Edit Data Rpp</h1>
+            <a href="/kelas" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-plus"></i> 
+                Kembali
+            </a>
+        </div>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4 p-3">
+            <div class="card-body">
+                <form method="POST" action="/rpp/<?php echo e($rpp->id_rpp); ?>">
+                <?php echo method_field('PATCH'); ?>
+                <?php echo csrf_field(); ?>
+                    <div class="mb-3">
+                        <label for="kompetensi_dasar" class="form-label">Kompetensi Dasar</label>
+                        <select class="form-select <?php $__errorArgs = ['kompetensi_dasar'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="kompetensi_dasar" id="kompetensi_dasar">
+                            <?php
+                                $get = DB::table('kompetensidasar')->where('id_kd', $rpp->kompetensi_dasar)->get('kd_ke');
+                            ?>
+                            <?php $__currentLoopData = $get; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                <option selected value="<?php echo e($rpp->kompetensi_dasar); ?>"><?php echo e($kd->kd_ke); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                            <?php
+                                $all = DB::table('kompetensidasar')->get();
+                            ?>
+                            <?php $__currentLoopData = $all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                <option value="<?php echo e($kd->id_kd); ?>"><?php echo e($kd->kd_ke); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                    <?php $__errorArgs = ['kompetensi_dasar'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="alert alert-danger mt-2">Harap Diisi!</div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tujuan_pembelajaran" class="form-label">Tujuan Pembelajaran</label>
+                        <input type="text" name="tujuan_pembelajaran" class="form-control" id="tujuan_pembelajaran"
+                            value="<?php echo e($rpp->tujuan_pembelajaran); ?>">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="ipk_pengetahuan" style="height: 100px" rows="7" name="ipk_pengetahuan"><?php echo e($rpp->ipk_pengetahuan); ?></textarea>
+                                    <label for="ipk_pengetahuan">Ipk Pengetahuan</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="ipk_keterampilan" style="height: 100px" rows="7" name="ipk_keterampilan"><?php echo e($rpp->ipk_keterampilan); ?></textarea>
+                                    <label for="ipk_keterampilan">Ipk Keterampilan</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="materi_pembelajaran" class="form-label">Materi Pembelajaran</label>
+                        <input type="text" name="materi_pembelajaran" class="form-control" id="materi_pembelajaran"
+                            value="<?php echo e($rpp->materi_pembelajaran); ?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary float-end">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts/appAdmin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\code\uji-level\4\resources\views/data_rpp/edit.blade.php ENDPATH**/ ?>
